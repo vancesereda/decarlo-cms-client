@@ -8,8 +8,9 @@ import Home from './containers/Home';
 import Template from './containers/Template';
 import AppliedRoute from './components/AppliedRoute'
 import RandomPhoto from './components/randomPhoto'
+import EditPage from './containers/EditPage'
 
-export default ( { childProps } ) => (
+export default ( { childProps, templateProps } ) => (
     <Switch>
         <AppliedRoute path="/signup" exact component={Signup} props={childProps} />
         <AppliedRoute path="/" exact component={RandomPhoto} props={childProps} />

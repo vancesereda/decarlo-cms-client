@@ -2,15 +2,15 @@ import React, { Component } from 'react'
 import alphasort from 'alphanum-sort'
 import NukaSlider from './NukaSlider';
 import { Storage } from 'aws-amplify';
+import { Input, FormGroup, Form, Label} from 'reactstrap'
 
 
 
-const ImageMap = ({ items }) => {
-    console.log('items imagemap:', items)
+const ImageMap = ({items}) => {
     return items.map((item, i) => (
                 <div key={i}>
                     <img src={`https://s3.amazonaws.com/www.domdecarlo.com/files/gimgs/${item.file}`} />
-                    {items.caption === "undefined" ? items.caption : ''}
+                    {item.caption === "undefined" ? item.caption : ''}
                 </div>
             ))
 }
