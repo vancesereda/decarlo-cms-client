@@ -19,7 +19,7 @@ export default class EditPage extends Component {
         return (
 
             <div>
-                Boys Now
+                Test Page
 
 
             </div>
