@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import config from '../config'
 import { API } from 'aws-amplify';
 import { s3Upload } from "../libs/awsLib";
+import { Link } from 'react-router-dom'
 import { Button, Form, FormGroup, Label, Input, FormText, Col, Row } from 'reactstrap';
 import '../css/NewPage.css'
 

@@ -46,11 +46,11 @@ export default class Template extends Component {
                                      
 
             {currentPage && !edit
-
+        
                 ?
                 
                 <div>
-                
+                    
                     <h1 style={{display: 'inline'}}>{className ==='tags' ? '' : name}</h1>
                     {isAuthenticated ? <Button color="primary" outline 
                                         style={{margin: '0px 0px 10px 25px'}} onClick={()=>this.setState({edit:!edit})}>
@@ -69,7 +69,7 @@ export default class Template extends Component {
                 
                 : 
                 
-                 edit ? <EditPage props={{ currentPage, isAuthenticated }} /> : ''
+                 edit ? <EditPage currentPage = {currentPage} isAuthenticated={isAuthenticated} handleChange={this.handleChange} /> : ''
             }
             </div>
 
