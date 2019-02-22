@@ -69,7 +69,7 @@ export default class Template extends Component {
                 
                 : 
                 
-                 edit ? <EditPage currentPage = {currentPage} isAuthenticated={isAuthenticated} handleChange={this.handleChange} /> : ''
+                 edit ? <EditPage currentPage = {currentPage} isAuthenticated={isAuthenticated}/> : ''
             }
             </div>
 

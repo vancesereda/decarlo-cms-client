@@ -19,7 +19,8 @@ export default class NewPage extends Component {
           files: [],
           captions: [],
           slideshow: false,
-          section: "2019"
+          section: "2019",
+          text: ""
         };
       }
     
@@ -115,7 +116,7 @@ export default class NewPage extends Component {
 
     render() {
         const { isAuthenticated } = this.props.childProps;
-        const { files, attachments, captions} = this.state;
+        const { files, attachments, captions, text} = this.state;
         return (
             <div>
             { isAuthenticated 
@@ -161,7 +162,7 @@ export default class NewPage extends Component {
             <FormGroup>
               <Label for="exampleText">Add text (HTML)</Label>
               <Input type="textarea" name="text" id="text" 
-                placeholder="<p>Placeholder Text</p>" onChange={this.handleChange}/>
+                placeholder="<p>Placeholder Text</p>" rows={text.split("\n").length||[1]} onChange={this.handleChange}/>
               <br/>
               {/* <Button outline color="primary" onClick={(e)=>e.preventDefault()}> Preview HTML</Button> */}
             </FormGroup>

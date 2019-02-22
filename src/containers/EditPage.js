@@ -1,22 +1,85 @@
 import React, { Component } from 'react'
-
+import { API, Storage } from 'aws-amplify'
 import { Button, Form, FormGroup, Label, Input, FormText, Col, Row } from 'reactstrap';
+import s3Upload from '../libs/awsLib'
 
+
+
+
+const tagsList = ["Branding",
+    "Fine Art",
+    "Illustration",
+    "Logo",
+    "Posters",
+    "Print Design"
+]
 
 export default class EditPage extends Component {
 
 
     constructor(props) {
         super(props)
-        this.state = {
-
-        }
+        this.state = {}
     }
 
     handleChange = (e) => {
 
-
+        console.log(e.target.value)
         this.setState({[e.target.id]:e.target.value})
+
+    }
+
+    handleCaption = (event) => {
+
+        const current = event.target.id.split('n')[1]
+        this.setState({
+            [event.target.id]: event.target.value
+        });
+        const { captions } = this.state;
+        captions[current] = event.target.value;
+        this.setState({ captions }, ()=>console.log(this.state))
+    }
+
+    handleSubmit = (e) => {
+
+        const length = Object.keys(this.state).length
+        const entries = Object.entries(this.state)
+        const body = {...this.state}
+
+        
+        
+
+        if (body.length) {
+            
+            
+            API.put("pages", `/pages/${this.props.match.params}`, { body })
+            
+
+
+
+
+        } else {
+            alert('Nothing was changed')
+        }
+
+
+    }
+
+
+    handleTags = (e) => {
+
+
+        if (this.state.tags) {
+            const { tags } = this.state;
+            if (tags.indexOf(e.target.id) < 0) {
+                tags.push(e.target.id)
+                this.setState({tags})
+            }
+        } else {
+            const tags = [];
+            tags.push(e.target.id)
+            this.setState({tags})
+        }
 
     }
 
@@ -25,8 +88,10 @@ export default class EditPage extends Component {
 
 
     render() {
-        console.log('EDITPAGE PROPS: ', this.props);
-        const { isAuthenticated, currentPage: {name, text, section, to}, handleChange } = this.props || "";
+        const { isAuthenticated, currentPage: { tags, name, text, section, to, slideshow, attachments } , currentPage } = this.props || "";
+        console.log('this.state: ', this.state, `\n`, 'this.props:  ', this.props)
+        console.log(Object.entries(this.state))
+
         return (
     <div>
     <h1>Edit Page</h1>
@@ -54,16 +119,21 @@ export default class EditPage extends Component {
         <option>{`2015`}</option>
         </Input>
     </FormGroup>
-    <FormGroup>
-        <Label for="exampleSelectMulti">Tags (select one or multiple)</Label>
-        <Input type="select" name="selectMulti" id="tags" multiple>
-        <option>Branding</option>
-        <option>Fine Art</option>
-        <option>Illustration</option>
-        <option>Logo</option>
-        <option>Posters</option>
-        <option>Print Design</option>
-        </Input>
+
+    <FormGroup row>
+        <Col xs={12}>
+            <Label for="exampleSelectMulti">Tags (select one or multiple)</Label>
+        </Col>
+        {tagsList.map((tag, i)=>
+            <Col xs={6} key={i}>
+                <FormGroup check>
+                    <Label check>
+                    <Input type="checkbox" id={tag} onChange={this.handleTags}/>
+                    {tag}
+                    </Label>
+                </FormGroup>
+            </Col>)
+        }
     </FormGroup>
 
 
@@ -88,39 +158,41 @@ export default class EditPage extends Component {
 
     {/* CAPTIONS */}
 
-    {/*  <FormGroup>
-    <Label for="captions">{files.length ?` Insert Captions` : ''}</Label>
     
-*/}
-    {/* {files.map((file,i)=> (
+    {attachments.length ? attachments.map(({ file, caption },i)=> (
         <Row key ={i}>
-            <Col sm={12} md={6} style={{wordWrap:'flex-wrap'}}><Label>{`${file.name.substr(0,8)}...${file.name.substr(file.name.length-3, file.name.length)}`}</Label></Col>
-            <Col sm={12} md={6}><Button onSubmit={(e)=>e.preventDefault()} onClick={()=>this.deleteFile(i)}>Delete</Button></Col>
+            <Col sm={12} md={6} style={{wordWrap:'flex-wrap'}}><Label>{`${file.substr(0,8)}...${file.substr(file.length-3, file.length)}`}</Label></Col>
+            <Col sm={12} md={6}><Button onSubmit={(e)=>e.preventDefault()} outline onClick={()=>this.deleteFile(i)}>Delete</Button></Col>
             <Col sm={12} md={6}>
-                <img src={URL.createObjectURL(file)} />
+                <img src={`https://s3.amazonaws.com/www.domdecarlo.com2/public/files/gimgs/${file}`} />
             </Col>
 
             <Col sm={12} md={6}>
-                <Input type="textarea" id={`caption${i}`} value={this.state.captions[i]} onChange={this.handleCaption}  />
+                <Input type="textarea" id={`caption${i}`} value={caption!=='null' && this.state.caption ? caption : this.state.captions[i]} onChange={this.handleCaption}  />
             </Col>
         </Row>
 
         ))
-    } */}
-    {/* </FormGroup>
-*/}
+    : null }  
+
 
     <FormGroup>
         <legend>Image display options</legend>
         <FormGroup check>
         <Label check>
-            <Input type="checkbox"  value={this.state.slideshow} onClick={()=>this.setState({slideshow: !this.state.slideshow})}/>{' '}
+            <Input type="checkbox"  value={this.state.slideshow ? this.state.slideshow : slideshow } onClick={()=>this.setState({slideshow: !this.state.slideshow})}/>{' '}
             Slideshow
         </Label>
         </FormGroup>
     </FormGroup>
-    
-    <Button onClick={this.handleSubmit}>Submit</Button>
+    <Row>
+        <Col xs={10}>
+            <Button onClick={this.handleSubmit} color="primary" outline >Save</Button>
+        </Col>
+        <Col xs={2} >
+            <Button onClick={this.deletePage} color="danger" outline >Delete Page</Button>
+        </Col>
+    </Row>
     </Form>
 
 
