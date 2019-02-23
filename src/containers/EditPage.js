@@ -42,22 +42,31 @@ export default class EditPage extends Component {
 
     handleSubmit = (e) => {
 
-        const length = Object.keys(this.state).length
-        const entries = Object.entries(this.state)
+        const { currentPage } = this.props;
+
+        
+
         const body = {...this.state}
-
-        
-        
-
-        if (body.length) {
+        console.log(body)
+        const bodyKeys = Object.keys(body)
+        if (bodyKeys.length) {
+            for (let [key, value] of Object.entries(currentPage)) {
+                
+                if (bodyKeys.indexOf(key)) {
+                    body[key] = value
+                }
+    
+            }
+            console.log(body)
+            try {
+                API.put("pages", `/pages/${this.props.currentPage.to}`, { body }).then(res=>res).catch(e=>console.log(e.response))
+                this.props.toggleEdit();
+            }
+            catch(e) {
+                console.log(e.response)
+            }
             
             
-            API.put("pages", `/pages/${this.props.match.params}`, { body })
-            
-
-
-
-
         } else {
             alert('Nothing was changed')
         }
@@ -74,6 +83,7 @@ export default class EditPage extends Component {
             if (tags.indexOf(e.target.id) < 0) {
                 tags.push(e.target.id)
                 this.setState({tags})
+                console.log('VALUE',e.target.value)
             }
         } else {
             const tags = [];
@@ -124,16 +134,18 @@ export default class EditPage extends Component {
         <Col xs={12}>
             <Label for="exampleSelectMulti">Tags (select one or multiple)</Label>
         </Col>
-        {tagsList.map((tag, i)=>
+        {tagsList.map((tag, i)=> {
+            console.log(tags.indexOf(tag))
+            return(
             <Col xs={6} key={i}>
                 <FormGroup check>
-                    <Label check>
-                    <Input type="checkbox" id={tag} onChange={this.handleTags}/>
-                    {tag}
-                    </Label>
+                    
+                    <Input type="checkbox" id={tag} checked={tags.indexOf(tag)===0 ? true : false} onChange={this.handleTags}/>
+                    <Label check>{tag}</Label>
+                    
                 </FormGroup>
             </Col>)
-        }
+        })}
     </FormGroup>
 
 

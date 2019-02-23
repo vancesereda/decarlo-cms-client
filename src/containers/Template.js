@@ -31,6 +31,10 @@ export default class Template extends Component {
         console.log(e.target.value)
     }
 
+    toggleEdit = () => {
+        this.setState({edit:!this.state.edit})
+    }
+
 
 
     render() {
@@ -69,7 +73,7 @@ export default class Template extends Component {
                 
                 : 
                 
-                 edit ? <EditPage currentPage = {currentPage} isAuthenticated={isAuthenticated}/> : ''
+                 edit ? <EditPage currentPage = {currentPage} isAuthenticated={isAuthenticated} toggleEdit={this.toggleEdit}/> : ''
             }
             </div>
 
