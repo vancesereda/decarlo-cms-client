@@ -11,6 +11,7 @@ import Contact from './components/Contact'
 import { TypographyStyle, GoogleFont } from 'react-typography'
 import Layout from './components/Layout'
 import { withRouter } from 'react-router-dom'
+import PageInfo from './components/pageInfo'
 
 const typography = new Typography({
   baseFontSize: '14px',
@@ -19,6 +20,14 @@ const typography = new Typography({
   bodyFontFamily: ['Helvetica Neue','Verdana', 'Helvetica', 'Arial','sans-serif'],
 })
 
+const sortByCreated = (arr) => {
+  return arr.sort(function (a, b) {
+    console.log(a)
+    return b.createdAt-a.createdAt
+  })
+}
+
+
 
 
 class App extends Component {
@@ -26,7 +35,7 @@ class App extends Component {
     super(props);
     this.state = {
       isAuthenticated : false,
-      pages: [],
+      pages: PageInfo.body,
       gimgs: [],
       isAuthenticating: true
     }
@@ -79,8 +88,7 @@ class App extends Component {
       userHasAuthenticated: this.userHasAuthenticated,
       history: this.props.history,
     };
-
-
+    console.log(pages.sort((a,b)=>  a.createdAt-b.createdAt))
 
     return (
      

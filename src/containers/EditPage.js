@@ -43,9 +43,6 @@ export default class EditPage extends Component {
     handleSubmit = (e) => {
 
         const { currentPage } = this.props;
-
-        
-
         const body = {...this.state}
         console.log(body)
         const bodyKeys = Object.keys(body)
@@ -93,6 +90,29 @@ export default class EditPage extends Component {
 
     }
 
+    deleteFile = (i) => {
+        const { files, captions } = this.state;
+        files.splice(i,1);
+        captions.splice(i,1);
+        this.setState({files, captions})
+        console.log(this.state.files, this.state.captions, files, captions)
+    }
+
+    deletePage = () => {
+
+        try {
+            API.del("pages",`/pages/${this.props.currentPage.to}`)
+            window.confirm('Are you sure you want to delete the page?')
+            this.props.toggleEdit();
+            this.props.history.push('/')
+        } catch(e) {
+            console.log(e)
+        }
+    }
+
+
+    
+
 
 
 
@@ -135,7 +155,6 @@ export default class EditPage extends Component {
             <Label for="exampleSelectMulti">Tags (select one or multiple)</Label>
         </Col>
         {tagsList.map((tag, i)=> {
-            console.log(tags.indexOf(tag))
             return(
             <Col xs={6} key={i}>
                 <FormGroup check>
@@ -164,8 +183,9 @@ export default class EditPage extends Component {
     <FormGroup>
         <Label for="file">Files</Label>
         <Input type="file" name="file" id="file" multiple onChange={this.handleFileSubmitChange}/>
-        
     </FormGroup>
+
+    
 
 
     {/* CAPTIONS */}

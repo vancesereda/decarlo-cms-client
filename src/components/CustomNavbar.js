@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, NavbarToggler, Collapse, Col, Row, Popover, PopoverBody, PopoverHeader, Button, NavItem, Nav  } from 'reactstrap';
-import {NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import '../css/Navbar.css'
 import Draggable from 'react-draggable'
 import Contact from './Contact'
