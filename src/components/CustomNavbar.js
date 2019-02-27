@@ -47,7 +47,7 @@ export default class CustomNavbar extends Component {
 
                         <div className="left-nav" style={{'left':`${this.state.isOpen ? `0` : `100vw`}`}}>
 
-                            <OrganizedNavbar pages={this.props.pages} /><br />
+                            <OrganizedNavbar pages={this.props.pages} onClick={this.toggle}/><br />
                             {this.props.pages ? <Login handleLogout={this.props.handleLogout} childProps={this.props.childProps}/> : ''}
                             <Contact />
 
@@ -65,10 +65,10 @@ export default class CustomNavbar extends Component {
 
 }
 //_this.props.userHasAuthenticated is not a function
-const NavMap = ({pages}) =>  (
+const NavMap = ({pages, onClick}) =>  (
     <div>
     {pages.map((page) => (
-      <NavItem key={page.name} className={page.className}>
+      <NavItem key={page.name} className={page.className} onClick={onClick}>
     {
         page.to.includes('https') 
 
@@ -97,7 +97,7 @@ const navObjects = [
 ]
 
 
-const OrganizedNavbar = ({pages}) => {
+const OrganizedNavbar = ({pages, onClick}) => {
     
     return (
     <div>
@@ -107,7 +107,7 @@ const OrganizedNavbar = ({pages}) => {
                 {i !== 0 ? <NavItem className="bold" key={i}>
                     {obj}
                 </NavItem> : ''}
-                <NavMap pages={pages.filter(p=>p.section===obj)} key={i+1}/>
+                <NavMap pages={pages.filter(p=>p.section===obj)} key={i+1} onClick={onClick}/>
             </div>
             )
         }): null }

@@ -33,6 +33,7 @@ export default class RandomPhoto extends Component {
     }
 
     componentDidMount() {
+        console.log('mount')
         
         this.getScriptImages();
 
@@ -68,7 +69,7 @@ export default class RandomPhoto extends Component {
                 if (height < 850) {
                     return  Math.random()*(height-500) + 350
                 } else {
-                    return Math.random()*height/1.5;
+                    return Math.random()*height/3;
                 }
             })
         })
@@ -83,7 +84,7 @@ export default class RandomPhoto extends Component {
             this.setState({ script_images })
             return script_images;
 
-        }).catch(e=>console.log(e))
+        }).catch(e=>console.log('SCRIPT', e))
     }
 
 
@@ -98,7 +99,7 @@ export default class RandomPhoto extends Component {
                             <img src={`https://s3.amazonaws.com/www.domdecarlo.com2/public/files/gimgs/1_background_twenties.jpg`} />
                     </div>
                     <Draggable onStart={this.onStart} >
-                    <div className="front-page-text"><strong>Click and drag the images that appear.</strong></div>
+                    <div className="front-page-text"><h4>Welcome to my portfolio site. Click and drag to look at my pictures.</h4></div>
                     </Draggable>
                     
                         {script_images.map((img, i) => {

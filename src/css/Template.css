@@ -17,21 +17,7 @@
     float: left;
 }
 
- 
- /* slick-prev {
-    position: absolute;
-    left: 5% !important;
-    top: 25%;
-    z-index: 1;
-    color: black;
-}
-.slick-next {
-    position: absolute;
-    right: 5% !important;
-    top: 25%;
-    z-index: 1;
-} 
- */
+
  .slick-prev:before,
 .slick-next:before {
     display: visible !important;
