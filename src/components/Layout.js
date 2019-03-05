@@ -21,7 +21,7 @@ const Layout = ( props ) => (
             <Col sm={{size: 7}} className="page-detail">
 
               <span className="sm-scrn">
-                <div>
+                <div className="page">
                     {props.children}
                 </div>
               </span>
@@ -29,7 +29,7 @@ const Layout = ( props ) => (
 
 
               <span className="lg-scrn">
-                <div className="page">
+                <div >
                     {props.children}
                 </div>
                 <Contact />

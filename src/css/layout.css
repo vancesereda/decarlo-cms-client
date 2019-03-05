@@ -641,7 +641,7 @@ pre tt:after {
 
 
 
-.main-container {
+.container {
   padding: 15px 50px 15px 40px;
   margin-left: 0px !important;
   margin-right: 0px !important;
@@ -767,7 +767,7 @@ p.contact, p.contact a {
   }
   
 
-  .container {
+  .page {
     padding: 5px 0px 0px 0px;
     margin: 0px 0px 0px 0px;
   }
@@ -779,11 +779,7 @@ p.contact, p.contact a {
     z-index: 10;
   }
 
-  .page-detail {
-
-    margin-left: 0px
-
-  }
+ 
 
   .fix-scroll {
     position: inherit;
@@ -805,6 +801,10 @@ p.contact, p.contact a {
   }
   img {
     max-width: 300px;
+  }
+  .container {
+    padding-left: 5px;
+    padding-right: 5px;
   }
 
 
