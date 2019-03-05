@@ -28,7 +28,7 @@ export default class ContentMap extends Component {
         const { items, slideshow, setNumber } = this.props;
         
         return (
-        <div> {slideshow ? <SimpleSlider items={items}/> : <ImageMap items={items}/> } </div>
+        <div> {slideshow === 'true' ? <SimpleSlider items={items}/> : <ImageMap items={items}/> } </div>
         )
 
         

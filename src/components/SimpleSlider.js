@@ -15,6 +15,7 @@ export default class SimpleSlider extends Component {
       slidesToScroll: 1,
       adaptiveHeight: true,
       animate: true,
+      initialSlide: 0,
       className:'slider-width'
     };
     return (

@@ -19,7 +19,9 @@ export default class EditPage extends Component {
 
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = {
+            captions: []
+        }
     }
 
     handleChange = (e) => {
@@ -124,7 +126,8 @@ export default class EditPage extends Component {
 
         return (
     <div>
-    <h1>Edit Page</h1>
+    <h1 style={{display: 'inline'}}>Edit Page</h1>
+    <Button onClick={this.props.toggleEdit} outline style={{float: 'right'}}>Cancel</Button>
 
     <Form onSubmit={this.handleSubmit}>
     <FormGroup>
@@ -200,7 +203,7 @@ export default class EditPage extends Component {
             </Col>
 
             <Col sm={12} md={6}>
-                <Input type="textarea" id={`caption${i}`} value={caption!=='null' && this.state.caption ? caption : this.state.captions[i]} onChange={this.handleCaption}  />
+                <Input type="textarea" id={`caption${i}`} value={caption !=='null' && this.state.captions.length ? caption : this.state.captions[i]} onChange={this.handleCaption}  />
             </Col>
         </Row>
 
