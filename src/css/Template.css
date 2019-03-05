@@ -1,8 +1,12 @@
- 
 .slider-width {
-    width: 80% !important;
+    width: 90% !important;
     max-width: 100%;
 }
+
+/* .slick-track img {
+    padding-left: 50px;
+    padding-right: 50px;
+} */
 
 .slick-track img {
     margin: 0 auto;
@@ -18,26 +22,34 @@
 }
 
 
+.slick-prev {
+    position: absolute;
+    left: 5%;
+    top: 50% ;
+    z-index: 10;
+    color: black ;
+    
+}
+.slick-next {
+    position: absolute;
+    right: 5% !important ;
+    top: 60% ;
+    z-index: 10;
+} 
+
+
  .slick-prev:before,
 .slick-next:before {
     display: visible !important;
-    color: black;
+    color: black !important;
 }
  
 
-.carousel-width {
-    max-width: 100%;
-    width: 100%;
-}
-.carousel-width img {
-    margin: 0 auto;
-}
-.slider-list {
-    margin-left: auto;
-    margin-right: auto;
-}
+ 
 
 @media screen and (max-width: 500px) {
+
+
 
 
     .center-twenties {
@@ -49,40 +61,47 @@
         
     }
 
+    img {
+        max-height: 500px !important
+    }
+
+
 
     .slick-track img {
-        margin: 0 auto;
         width: 300px;
+       
     }
-    body {
-        position: fixed;
+
+    .slick-track {
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        display: flex;
     }
-    img {
-        z-index: 5;
-    }
+    
+
     .slick-slider {
         left: 0%;
         z-index: 1;
         position: fixed;
-        max-width: 300px !important
+        max-width: 300px !important;
     }
+    
     .slick-prev:before,
     .slick-next:before {
     color: black;
-    } 
-    .slick-prev {
-        position: fixed;
-        left: 0% !important;
-        top: 40%;
-        z-index: 1;
+    }  
+     .slick-prev {
+        position: absolute;
+        left: -25px !important;
+        z-index: 10;
         color: black;
         
     }
     .slick-next {
-        position: fixed;
-        right: 0% !important;
-        top: 40%;
-        z-index: 1;
+        position: absolute;
+        right: -25px!important;
+        z-index: 10 !important;
     }
     iframe {
         width: 300px;

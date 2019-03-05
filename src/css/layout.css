@@ -641,8 +641,8 @@ pre tt:after {
 
 
 
-.container {
-  padding: 15px 50px 15px 40px;
+.main-container {
+  padding: 15px 50px 15px 40px !important;
   margin-left: 0px !important;
   margin-right: 0px !important;
 }
@@ -767,10 +767,7 @@ p.contact, p.contact a {
   }
   
 
-  .page {
-    padding: 5px 0px 0px 0px;
-    margin: 0px 0px 0px 0px;
-  }
+
   .random-photo .img {
     width: 150px
   }
@@ -803,8 +800,8 @@ p.contact, p.contact a {
     max-width: 300px;
   }
   .container {
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 5px !important;
+    padding-right: 5px !important ;
   }
 
 

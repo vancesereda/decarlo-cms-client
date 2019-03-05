@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import alphasort from 'alphanum-sort'
-import NukaSlider from './NukaSlider';
 import { Storage } from 'aws-amplify';
 import { Input, FormGroup, Form, Label} from 'reactstrap'
+import SimpleSlider from './SimpleSlider'
 
 
 
@@ -27,33 +27,12 @@ export default class ContentMap extends Component {
 
         const { items, slideshow, setNumber } = this.props;
         
-        if (slideshow === 'true') {
-            if (setNumber === `31`) { //daily photos set is #31
-                return (
-                    <div>
-                        <NukaSlider items={items} />
-                    </div>
-                )
-            } else {
-                return (
-                    <div>
-                        <span className="lg-scrn">
-                            <NukaSlider items={items} />
-                        </span>
-                        <span className="sm-scrn">
-                            <ImageMap items={items} />
-                        </span>
-                    </div>
+        return (
+        <div> {slideshow ? <SimpleSlider items={items}/> : <ImageMap items={items}/> } </div>
+        )
 
-                )
-            }
-        } else if (setNumber.length) {
-            return (
-            <ImageMap items={items} />
-            )
-        } else {
-            return (<div></div>)
-        } 
+        
+
     }
 }
 
