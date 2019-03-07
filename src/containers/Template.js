@@ -71,13 +71,13 @@ export default class Template extends Component {
                 <div>
                     
                     <h1>{className ==='tags' ? '' : name}</h1>
+                    {text !== 'null' ? Parser(`${text}`): ''}
                     {isAuthenticated ? <Button color="primary" outline 
-                                        style={{margin: '0px 0px 10px 25px'}} onClick={()=>this.setState({edit:!edit})}>
+                                        style={{margin: '0px 0px 10px 25px', float: 'right'}} onClick={()=>this.setState({edit:!edit})}>
 
                                             {!edit ? `Edit Page` : `Save`}
 
                                         </Button>: '' }
-                    {text !== 'null' ? Parser(`${text}`): ''}
                     <ContentMap 
                         items={setNumber === '31' ? attachments.sort(function(a,b) {return (a.file > b.file) ? 1 : ((b.file > a.file) ? -1 : 0);}).reverse(): attachments}
                         setNumber={setNumber}

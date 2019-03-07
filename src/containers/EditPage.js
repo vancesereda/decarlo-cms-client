@@ -46,20 +46,18 @@ export default class EditPage extends Component {
     handleSubmit = (e) => {
 
         const { currentPage } = this.props;
-        const body = {...this.state}
-        console.log(body)
+        let body = {...this.state}
         const bodyKeys = Object.keys(body)
         if (bodyKeys.length) {
             for (let [key, value] of Object.entries(currentPage)) {
-                
-                if (bodyKeys.indexOf(key)) {
-                    body[key] = value
+                if (bodyKeys.indexOf(key)===-1) {
+                    body = {...body, [key]: value}
                 }
     
             }
-            console.log(body)
+        console.log(body)   
             try {
-                API.put("API.endpoints.name", `/prod-pages/${this.props.currentPage.to}`, { body }).then(res=>res).catch(e=>console.log(e.response))
+                API.put("pages", `/pages/${this.props.currentPage.to}`, { body }).then(res=>console.log(res)).catch(e=>console.log(e.response))
                 this.props.toggleEdit();
             }
             catch(e) {
@@ -104,7 +102,7 @@ export default class EditPage extends Component {
     deletePage = () => {
 
         try {
-            API.del("prod-pages",`/prod-pages/${this.props.currentPage.to}`)
+            API.del("pages",`/pages/${this.props.currentPage.to}`)
             window.confirm('Are you sure you want to delete the page?')
             this.props.toggleEdit();
             this.props.history.push('/')
