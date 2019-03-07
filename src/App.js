@@ -20,12 +20,6 @@ const typography = new Typography({
   bodyFontFamily: ['Helvetica Neue','Verdana', 'Helvetica', 'Arial','sans-serif'],
 })
 
-const sortByCreated = (arr) => {
-  return arr.sort(function (a, b) {
-    console.log(a)
-    return b.createdAt-a.createdAt
-  })
-}
 
 
 
@@ -56,9 +50,8 @@ class App extends Component {
   getInfo = async () => {
     const { pages } = this.state;
     const request = await API.get("pages", "/pages").then(res=> {
-      console.log('IS ANYTHING HAPPENING!!!!!')
+      res.sort(function(a,b) {return (a.createdAt > b.createdAt) ? 1 : ((b.createdAt > a.createdAt) ? -1 : 0);})
       this.setState({ pages: res })
-      
       return res;
     }).catch(err=>console.log(err.response))
   }
@@ -90,8 +83,6 @@ class App extends Component {
       userHasAuthenticated: this.userHasAuthenticated,
       history: this.props.history,
     };
-    console.log(pages.sort((a,b)=>  a.createdAt-b.createdAt))
-
     return (
      
       <Layout pages={pages} handleLogout={this.handleLogout} childProps={childProps}>

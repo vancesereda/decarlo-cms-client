@@ -11,6 +11,9 @@
 # production
 /build
 
+#have to store an IAM key in here because of AWS Amplify issues, and it gets flagged.
+/src/components/RandomPhoto.js
+
 # misc
 .DS_Store
 .env.local

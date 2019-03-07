@@ -9,7 +9,7 @@ import SimpleSlider from './SimpleSlider'
 const ImageMap = ({items}) => {
     return items.map((item, i) => (
                 <div key={i}>
-                    <img src={`https://s3.amazonaws.com/www.domdecarlo.com/files/gimgs/${item.file}`} />
+                    <img src={`https://s3.amazonaws.com/www.domdecarlo.com2/public/files/gimgs/${item.file}`} />
                     {item.caption === "undefined" ? item.caption : ''}
                 </div>
             ))

@@ -3,10 +3,10 @@ import { API, Storage } from 'aws-amplify';
 import '../css/Template.css';
 import Parser from 'html-react-parser';
 import ContentMap from '../components/ContentMap'
-import alphasort from 'alphanum-sort'
 import { Link, BrowserRouter as Router, Route } from 'react-router-dom'
 import { Button, Form, FormGroup, Label, Input, FormText, Col, Row } from 'reactstrap';
 import EditPage from './EditPage'
+var alphasort = require('alphanum-sort')
 
 export default class Template extends Component {
     constructor(props) {
@@ -19,9 +19,12 @@ export default class Template extends Component {
     }
 
 
+    componentDidMount() {
+    }
+
     getNote() {
         console.log(this.props)
-        return API.get(`prod-pages`, `/prod-pages/${this.props.match.params.to}`);
+        return API.get(`pages`, `/pages/${this.props.match.params.to}`);
     }
 
     handleChange = (e) => {
@@ -34,16 +37,28 @@ export default class Template extends Component {
     toggleEdit = () => {
         this.setState({edit:!this.state.edit})
     }
+    
+
 
 
 
     render() {
         const { pages, match: { params: { to } }, childProps: { isAuthenticated }} = this.props || "";
         const currentPage = pages.filter(p=>p.to===to)[0];
-        
-        const { text, className, name, setNumber, slideshow, attachments } =  currentPage || "";
+        const { text, className, name, setNumber, slideshow} =  currentPage || "";
+        // if (setNumber === '31') {
+        //     const {caption, file} = attachments;
+        //     sort(captions);
+        //     attachments = {}
+        // }
+
+
+
         const { edit } = this.state;
-        console.log(attachments)
+        const { attachments, tags } = currentPage || [];
+
+        
+        
         return (
 
             <div>
@@ -64,7 +79,7 @@ export default class Template extends Component {
                                         </Button>: '' }
                     {text !== 'null' ? Parser(`${text}`): ''}
                     <ContentMap 
-                        items={attachments==='null' ? [] : attachments}
+                        items={setNumber === '31' ? attachments.sort(function(a,b) {return (a.file > b.file) ? 1 : ((b.file > a.file) ? -1 : 0);}).reverse(): attachments}
                         setNumber={setNumber}
                         slideshow={slideshow}
                     />
