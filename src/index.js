@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import Amplify from 'aws-amplify';
+import Amplify, { Storage }from 'aws-amplify';
 import config from './config';
 import { BrowserRouter as Router } from 'react-router-dom';
 
@@ -18,7 +18,11 @@ Amplify.configure({
     Storage: {
         region: config.s3.REGION,
         bucket: config.s3.BUCKET,
-        identityPoolId: config.cognito.IDENTITY_POOL_ID
+        identityPoolId: config.cognito.IDENTITY_POOL_ID,
+        credentials: {
+            accessKeyId: 'AKIAJDSAPBOWXVZNZV3A',
+            secretAccessKey: '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'
+        }
     },
     API: {
         endpoints: [
@@ -28,6 +32,15 @@ Amplify.configure({
                 region: config.apiGateway.REGION
             },
         ]
+    }
+});
+
+Storage.configure({
+    bucket: config.s3.BUCKET,
+    region: config.s3.REGION,
+    credentials: {
+        accessKeyId: 'AKIAJDSAPBOWXVZNZV3A',
+        secretAccessKey: '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'
     }
 });
 

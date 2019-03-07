@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { API, Storage } from 'aws-amplify'
 import { Button, Form, FormGroup, Label, Input, FormText, Col, Row } from 'reactstrap';
 import s3Upload from '../libs/awsLib'
+import '../css/EditPage.css'
 
 
 

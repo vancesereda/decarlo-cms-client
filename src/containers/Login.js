@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Auth } from 'aws-amplify';
-import { Button, Form, FormGroup, Label, Input, NavItem, NavLink } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, NavItem, NavLink, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom'
 
 
@@ -65,16 +65,18 @@ class Login extends Component {
                 {open ?
                     <NavItem>
                         <Form inline>
-                            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                            <FormGroup className="mb-2 mr-sm-2">
                                 <Label for="exampleEmail" className="mr-sm-2" onClick={this.toggle}>@&nbsp;</Label>
                                 <Input value={email} onChange={this.handleChange} type="email" name="email" id="email" placeholder="email" />
                             </FormGroup>
-                            <FormGroup className="mb-2 mr-sm-2 mb-sm-0"  >
+                            <FormGroup className="mb-2 mr-sm-2"  >
                                 <Label for="examplePassword" className="mr-sm-2" >p&nbsp;&nbsp;&nbsp;</Label>
                                 <Input value={password} onChange={this.handleChange} type="password" name="password" id="password" placeholder="password" />
                             </FormGroup>
-                            <Button onClick={this.handleSubmit}>Submit</Button>
+                                
+                            
                         </Form> 
+                        <Button onClick={this.handleSubmit} style={{float:'left', display: 'block'}}>Submit</Button><br/><br/>
                     </NavItem>
                 :   
                     isAuthenticated 

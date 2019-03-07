@@ -48,8 +48,9 @@ export default class CustomNavbar extends Component {
                         <div className="left-nav" style={{'left':`${this.state.isOpen ? `0` : `100vw`}`}}>
 
                             <OrganizedNavbar pages={this.props.pages} onClick={this.toggle}/><br />
-                            {this.props.pages ? <Login handleLogout={this.props.handleLogout} childProps={this.props.childProps}/> : ''}
-                            <Contact />
+                            {this.props.pages.length ? <Login handleLogout={this.props.handleLogout} childProps={this.props.childProps}/> : ''}
+                            
+                            < br /> <Contact />
 
 
                         </div>

@@ -1,7 +1,15 @@
 import React, { Component } from 'react'
 import { Storage } from 'aws-amplify'
 import Draggable from 'react-draggable'
+var AWS = require('aws-sdk');
+var s3 = new AWS.S3();
 
+
+const AWS_S3 = new AWS.S3({
+    accessKeyId: 'AKIAJDSAPBOWXVZNZV3A',
+    region: 'us-east-1',
+    secretAccessKey: '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',
+});
 export default class RandomPhoto extends Component {
 
     constructor(props) {
@@ -36,6 +44,8 @@ export default class RandomPhoto extends Component {
         console.log('mount')
         
         this.getScriptImages();
+
+        this.newPicture();
 
         requestAnimationFrame(() => { // requestAnimationFrame necessary for setInterval to work properly on Firefox. 
                 this.interval = setInterval(()=>this.newPicture(), 5000)
@@ -78,13 +88,25 @@ export default class RandomPhoto extends Component {
 
     getScriptImages = () => {
         
-        Storage.list(`files/script_images/art/`).then(res=>{
-            
-            const script_images = res.map((obj,i)=>obj.key).filter(key=>!(key.includes('~')))
-            this.setState({ script_images })
-            return script_images;
 
-        }).catch(e=>console.log('SCRIPT', e))
+        const listAllKeys = (params, out = []) => new Promise((resolve, reject) => {
+            AWS_S3.listObjectsV2(params).promise()
+              .then(({Contents, IsTruncated, NextContinuationToken}) => {
+                out.push(...Contents);
+                !IsTruncated ? resolve(out) : resolve(listAllKeys(Object.assign(params, {ContinuationToken: NextContinuationToken}), out));
+              })
+              .catch(reject);
+          });
+          
+        listAllKeys({Bucket: 'www.domdecarlo.com2', Prefix: 'public/files/script_images/art/'})
+            .then(res=> {
+                console.log(res)
+                const script_images = res.map(obj=> obj.Key).filter(key=>!(key.includes('~')))
+                this.setState({script_images})
+                console.log(script_images)
+            })
+            .catch(e=>console.log(e));
+
     }
 
 
@@ -115,7 +137,7 @@ export default class RandomPhoto extends Component {
                                             }} 
                                             key={i+1} 
                                             className={zIndex > i ? `img display` : `img nodisplay`}>
-                                            <img src={`https://s3.amazonaws.com/www.domdecarlo.com2/public/${img}`} key={i+2} />
+                                            <img src={`https://s3.amazonaws.com/www.domdecarlo.com2/${img}`} key={i+2} />
                                         </div>
                                     </Draggable>
                             )
