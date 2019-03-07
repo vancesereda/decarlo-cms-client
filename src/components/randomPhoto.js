@@ -3,9 +3,9 @@ import { Storage } from 'aws-amplify'
 import Draggable from 'react-draggable'
 var AWS = require('aws-sdk');
 const AWS_S3 = new AWS.S3({
-    accessKeyId: 'AKIAJDSAPBOWXVZNZV3A',
+    accessKeyId: '',
     region: 'us-east-1',
-    secretAccessKey: 'CJ23usg6e/IbVN57UhKWZ356wTpPfXg09FSMbY8H',
+    secretAccessKey: '',
 });
 export default class RandomPhoto extends Component {
 
