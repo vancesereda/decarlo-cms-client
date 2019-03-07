@@ -120,8 +120,6 @@ export default class EditPage extends Component {
 
     render() {
         const { isAuthenticated, currentPage: { tags, name, text, section, to, slideshow, attachments } , currentPage } = this.props || "";
-        console.log('this.state: ', this.state, `\n`, 'this.props:  ', this.props)
-        console.log(Object.entries(this.state))
 
         return (
     <div>
