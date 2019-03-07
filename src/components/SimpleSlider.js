@@ -23,8 +23,8 @@ export default class SimpleSlider extends Component {
         <Slider {...settings}>
         {this.props.items.map( (item, i) =>  (
           <div>
-                <p>{item.caption === 'null' || ''}</p>
-                <img key={item.file} src={`https://s3.amazonaws.com/www.domdecarlo.com/files/gimgs/${item.file}`}
+                <p>{item.caption !== 'null' ? item.caption : ''}</p>
+                <img key={item.file} src={`https://s3.amazonaws.com/www.domdecarlo.com2/public/files/gimgs/${item.file}`}
                 onLoad={()=>window.dispatchEvent(new Event('resize'))}/>
           </div>
         ))}

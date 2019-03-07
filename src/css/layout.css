@@ -642,9 +642,8 @@ pre tt:after {
 
 
 .main-container {
-  padding: 15px 50px 15px 40px !important;
-  margin-left: 0px !important;
-  margin-right: 0px !important;
+  padding: 15px 50px 15px 30px !important;
+  margin: 0 auto;
 }
 
 .container {
@@ -652,7 +651,7 @@ pre tt:after {
 }
 .page-detail {
   padding-top: 20px;
-  margin-left: 5%;
+  margin-left: 5px;
   min-width: 100px;
 }
 
@@ -773,6 +772,8 @@ p.contact, p.contact a {
   }
   .front-page-text {
     position: fixed;
+    left: 10%;
+    right: 10%;
     z-index: 10;
   }
 

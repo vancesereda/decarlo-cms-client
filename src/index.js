@@ -19,10 +19,6 @@ Amplify.configure({
         region: config.s3.REGION,
         bucket: config.s3.BUCKET,
         identityPoolId: config.cognito.IDENTITY_POOL_ID,
-        credentials: {
-            accessKeyId: 'AKIAJDSAPBOWXVZNZV3A',
-            secretAccessKey: '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'
-        }
     },
     API: {
         endpoints: [
@@ -35,14 +31,6 @@ Amplify.configure({
     }
 });
 
-Storage.configure({
-    bucket: config.s3.BUCKET,
-    region: config.s3.REGION,
-    credentials: {
-        accessKeyId: 'AKIAJDSAPBOWXVZNZV3A',
-        secretAccessKey: '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'
-    }
-});
 
 ReactDOM.render(
     <Router>

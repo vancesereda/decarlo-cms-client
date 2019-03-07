@@ -27,7 +27,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "stop": "fuser -k 3000/tcp",
-    "sync": "aws s3 sync build/ s3://www.domdecarlo.com2"
+    "sync": "aws s3 sync build/ s3://www.domdecarlo.com2  &&  aws cloudfront create-invalidation --distribution-id E3MZJWRH49GURD --paths '/*'"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -21,7 +21,7 @@ export default class Template extends Component {
 
     getNote() {
         console.log(this.props)
-        return API.get("pages", `/pages/${this.props.match.params.to}`);
+        return API.get(`prod-pages`, `/prod-pages/${this.props.match.params.to}`);
     }
 
     handleChange = (e) => {
@@ -43,7 +43,7 @@ export default class Template extends Component {
         
         const { text, className, name, setNumber, slideshow, attachments } =  currentPage || "";
         const { edit } = this.state;
-        console.log(edit)
+        console.log(attachments)
         return (
 
             <div>
@@ -55,7 +55,7 @@ export default class Template extends Component {
                 
                 <div>
                     
-                    <h1 style={{display: 'inline'}}>{className ==='tags' ? '' : name}</h1>
+                    <h1>{className ==='tags' ? '' : name}</h1>
                     {isAuthenticated ? <Button color="primary" outline 
                                         style={{margin: '0px 0px 10px 25px'}} onClick={()=>this.setState({edit:!edit})}>
 

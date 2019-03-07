@@ -59,7 +59,7 @@ export default class EditPage extends Component {
             }
             console.log(body)
             try {
-                API.put("pages", `/pages/${this.props.currentPage.to}`, { body }).then(res=>res).catch(e=>console.log(e.response))
+                API.put("API.endpoints.name", `/prod-pages/${this.props.currentPage.to}`, { body }).then(res=>res).catch(e=>console.log(e.response))
                 this.props.toggleEdit();
             }
             catch(e) {
@@ -104,7 +104,7 @@ export default class EditPage extends Component {
     deletePage = () => {
 
         try {
-            API.del("pages",`/pages/${this.props.currentPage.to}`)
+            API.del("prod-pages",`/prod-pages/${this.props.currentPage.to}`)
             window.confirm('Are you sure you want to delete the page?')
             this.props.toggleEdit();
             this.props.history.push('/')

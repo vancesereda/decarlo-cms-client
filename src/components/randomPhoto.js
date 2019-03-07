@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import { Storage } from 'aws-amplify'
 import Draggable from 'react-draggable'
 var AWS = require('aws-sdk');
-var s3 = new AWS.S3();
-
-
 const AWS_S3 = new AWS.S3({
     accessKeyId: 'AKIAJDSAPBOWXVZNZV3A',
     region: 'us-east-1',
@@ -41,7 +38,6 @@ export default class RandomPhoto extends Component {
     }
 
     componentDidMount() {
-        console.log('mount')
         
         this.getScriptImages();
 
@@ -100,12 +96,13 @@ export default class RandomPhoto extends Component {
           
         listAllKeys({Bucket: 'www.domdecarlo.com2', Prefix: 'public/files/script_images/art/'})
             .then(res=> {
-                console.log(res)
                 const script_images = res.map(obj=> obj.Key).filter(key=>!(key.includes('~')))
                 this.setState({script_images})
-                console.log(script_images)
             })
             .catch(e=>console.log(e));
+
+
+
 
     }
 
@@ -121,7 +118,7 @@ export default class RandomPhoto extends Component {
                             <img src={`https://s3.amazonaws.com/www.domdecarlo.com2/public/files/gimgs/1_background_twenties.jpg`} />
                     </div>
                     <Draggable onStart={this.onStart} >
-                    <div className="front-page-text"><h4>Welcome to my portfolio site. Click and drag to look at my pictures.</h4></div>
+                    <div className="front-page-text"><h5>Click and drag to look at my work.</h5></div>
                     </Draggable>
                     
                         {script_images.map((img, i) => {

@@ -35,7 +35,7 @@ class App extends Component {
     super(props);
     this.state = {
       isAuthenticated : false,
-      pages: PageInfo.body,
+      pages: [],
       gimgs: [],
       isAuthenticating: true
     }
@@ -56,7 +56,9 @@ class App extends Component {
   getInfo = async () => {
     const { pages } = this.state;
     const request = await API.get("pages", "/pages").then(res=> {
+      console.log('IS ANYTHING HAPPENING!!!!!')
       this.setState({ pages: res })
+      
       return res;
     }).catch(err=>console.log(err.response))
   }

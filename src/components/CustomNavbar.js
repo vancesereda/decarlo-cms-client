@@ -41,7 +41,7 @@ export default class CustomNavbar extends Component {
                     <span className="sm-scrn">
                         <Draggable onStart={(e)=>e.preventDefault()} onClick={(e)=>e.preventDefault()}>
                         <Button outline className="left-nav-button" onClick={this.toggle}>
-                            {this.state.isOpen ? `>` : `<`}
+                        {this.state.isOpen ? `>` : `<`}
                         </Button>
                         </Draggable>
 
