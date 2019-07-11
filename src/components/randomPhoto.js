@@ -112,7 +112,6 @@ export default class RandomPhoto extends Component {
     render() {
         const { zIndex , click, left, top , width } = this.state;
         const { script_images } = this.state || [];
-        console.log(process.env)
         return (
             <div onClick={this.newPicture} className="random-photo">
             
