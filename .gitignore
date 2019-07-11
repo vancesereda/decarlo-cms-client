@@ -4,6 +4,10 @@
 /node_modules
 /.pnp
 .pnp.js
+.env
+
+/src/components/keys.js 
+#process env is absolutely broken beyond repair
 
 # testing
 /coverage

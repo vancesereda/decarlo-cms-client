@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { Storage } from 'aws-amplify'
 import Draggable from 'react-draggable'
+import keys from './keys'
+
 var AWS = require('aws-sdk');
 const AWS_S3 = new AWS.S3({
-    accessKeyId: '',
+    accessKeyId: keys.accessKeyId,
     region: 'us-east-1',
-    secretAccessKey: '',
+    secretAccessKey: keys.secretAccessKey,
 });
 export default class RandomPhoto extends Component {
 
@@ -110,6 +112,7 @@ export default class RandomPhoto extends Component {
     render() {
         const { zIndex , click, left, top , width } = this.state;
         const { script_images } = this.state || [];
+        console.log(process.env)
         return (
             <div onClick={this.newPicture} className="random-photo">
             
